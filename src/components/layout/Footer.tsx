@@ -7,7 +7,7 @@ import { Glasses, Mail, Phone, MapPin, ArrowUp } from 'lucide-react';
 import logo from '../../assets/images/logo.png';
 
 export default function Footer() {
-  const handleScrollTop = () => { 
+  const handleScrollTop = () => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
