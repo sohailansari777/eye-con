@@ -1,0 +1,6 @@
+{
+  "name": "EYE CON",
+  "description": "Premium minimal eyewear showcase website promoting modern digital identity and local shop visibility.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
