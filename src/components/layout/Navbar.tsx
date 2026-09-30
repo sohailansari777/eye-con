@@ -17,7 +17,8 @@ declare global {
 }
 import { motion, AnimatePresence } from 'motion/react';
 import { Menu, X, Glasses } from 'lucide-react';
-import logo from '../../assets/images/logo.png';
+import logoWebp from '../../assets/images/logo.webp';
+import logoPng from '../../assets/images/logo.png';
 
 interface NavItem {
   label: string;
@@ -28,10 +29,12 @@ interface NavItem {
 const NAV_ITEMS: NavItem[] = [
   { label: 'Home', href: '#home', id: 'home' },
   { label: 'Collections', href: '#collections', id: 'collections' },
+  { label: 'Inside Store', href: '#gallery', id: 'gallery' },
   { label: 'Services', href: '#services', id: 'services' },
   { label: 'Location', href: '#location', id: 'location' },
   { label: 'Contact', href: '#contact', id: 'contact' },
 ];
+
 
 export default function Navbar() {
   const [activeSection, setActiveSection] = useState('home');
@@ -91,11 +94,17 @@ export default function Navbar() {
             onClick={(e) => handleNavClick(e, 'home')}
             className="inline-flex items-center group cursor-pointer"
           >
-            <img
-              src={logo}
-              alt="EYE CON Logo"
-              className="h-24 w-auto object-contain bg-transparent"
-            />
+            <picture>
+              <source srcSet={logoWebp} type="image/webp" />
+              <img
+                src={logoPng}
+                alt="EYE CON Logo"
+                className="h-24 w-auto object-contain bg-transparent"
+                width={200}
+                height={96}
+                decoding="async"
+              />
+            </picture>
           </a>
 
           {/* Desktop Nav Items */}

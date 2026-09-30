@@ -6,7 +6,8 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, Star, ShoppingBag, ShieldCheck } from 'lucide-react';
-import heroDisplay from '../../assets/images/hero_display_1779867748872.png';
+import heroDisplayWebp from '../../assets/images/hero_display_1779867748872.webp';
+import heroDisplayPng from '../../assets/images/hero_display_1779867748872.png';
 
 export default function Hero() {
   const handleScrollToCollections = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -30,13 +31,8 @@ export default function Hero() {
       <div className="absolute bottom-10 right-0 w-96 h-96 bg-brand-orange/5 rounded-full blur-3xl -z-10 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center select-none relative z-10">
-        {/* Left text column */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="lg:col-span-6 space-y-8 text-left relative"
-        >
+        {/* Left text column (Instantaneous paint - 0ms render delay) */}
+        <div className="lg:col-span-6 space-y-8 text-left relative">
           {/* Majestic Backdrop Label */}
           <div className="absolute -left-12 -top-24 text-[150px] sm:text-[180px] font-black text-[#0F4C81]/5 leading-none select-none z-0 pointer-events-none">
             LOOK
@@ -89,23 +85,27 @@ export default function Hero() {
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
 
-        {/* Right visual column */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="lg:col-span-6 relative flex justify-center"
-        >
+
+        {/* Right visual column (Unblocked LCP container for instantaneous paint) */}
+        <div className="lg:col-span-6 relative flex justify-center">
           {/* Framed Image Container with Sharp Corner styling */}
           <div className="relative w-full max-w-[500px] aspect-[4/3] sm:aspect-square lg:aspect-[4/5] rounded-sm overflow-hidden shadow-xl border border-[#E2E8F0] bg-slate-100 group">
-            <img
-              src={heroDisplay}
-              alt="EYE CON Premium Eyewear Interior Showroom"
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              referrerPolicy="no-referrer"
-            />
+            <picture>
+              <source srcSet={heroDisplayWebp} type="image/webp" />
+              <img
+                src={heroDisplayPng}
+                alt="EYE CON Premium Eyewear Interior Showroom"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                referrerPolicy="no-referrer"
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+                width={1376}
+                height={768}
+              />
+            </picture>
             {/* Ambient vignette overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-transparent opacity-65 pointer-events-none" />
           </div>
@@ -135,8 +135,9 @@ export default function Hero() {
             <ShieldCheck className="w-4 h-4 text-brand-orange" />
             <span className="uppercase tracking-widest text-[10px]">2-Year Warranty</span>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
 }
+

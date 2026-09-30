@@ -3,16 +3,20 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import Navbar from './components/layout/Navbar';
 import Hero from './components/sections/Hero';
-import FramesGallery from './components/sections/FramesGallery';
-import ComingSoon from './components/sections/ComingSoon';
-import Location from './components/sections/Location';
-import Contact from './components/sections/Contact';
 import Footer from './components/layout/Footer';
-import FrameDetailsModal from './components/ui/FrameDetailsModal';
+import WhatsAppButton from './components/ui/WhatsAppButton';
 import { Frame } from './types';
+
+// Code-split below-the-fold components for instant FCP & LCP (< 1.5s)
+const FramesGallery = lazy(() => import('./components/sections/FramesGallery'));
+const ShopGallery = lazy(() => import('./components/sections/ShopGallery'));
+const ComingSoon = lazy(() => import('./components/sections/ComingSoon'));
+const Location = lazy(() => import('./components/sections/Location'));
+const Contact = lazy(() => import('./components/sections/Contact'));
+const FrameDetailsModal = lazy(() => import('./components/ui/FrameDetailsModal'));
 
 export default function App() {
   const [selectedFrame, setSelectedFrame] = useState<Frame | null>(null);
@@ -24,30 +28,45 @@ export default function App() {
 
       {/* Main Showcase Chapters */}
       <main className="flex-grow">
-        {/* Hero Section */}
+        {/* Instant Critical Above-The-Fold Hero Section */}
         <Hero />
 
-        {/* Catalog Search & Filtering */}
-        <FramesGallery onSelectFrame={setSelectedFrame} />
+        {/* Async Streamed Below-The-Fold Sections */}
+        <Suspense fallback={null}>
+          {/* Catalog Search & Filtering */}
+          <FramesGallery onSelectFrame={setSelectedFrame} />
 
-        {/* Innovative and Future Services */}
-        <ComingSoon />
+          {/* Inside EYE CON Real Store Photography Gallery */}
+          <ShopGallery />
 
-        {/* Flagship Store Coordinates / Google Maps */}
-        <Location />
+          {/* Innovative and Future Services */}
+          <ComingSoon />
 
-        {/* Quick Email Inquiry Form & Hotline Info */}
-        <Contact />
+          {/* Flagship Store Coordinates / Google Maps */}
+          <Location />
+
+          {/* Quick Email Inquiry Form & Hotline Info */}
+          <Contact />
+        </Suspense>
       </main>
 
       {/* Structured Dark Footer */}
       <Footer />
 
+      {/* Fixed Viewport Floating WhatsApp Button */}
+      <WhatsAppButton />
+
       {/* Premium Inspect Specification Overlay Modal */}
-      <FrameDetailsModal
-        frame={selectedFrame}
-        onClose={() => setSelectedFrame(null)}
-      />
+      <Suspense fallback={null}>
+        {selectedFrame && (
+          <FrameDetailsModal
+            frame={selectedFrame}
+            onClose={() => setSelectedFrame(null)}
+          />
+        )}
+      </Suspense>
     </div>
   );
 }
+
+

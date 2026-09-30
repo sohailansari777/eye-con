@@ -134,8 +134,13 @@ export default function Footer() {
 
       {/* Underline Divider */}
       <div className="max-w-7xl mx-auto border-t border-slate-800 my-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono">
-        <div>
-          &copy; {new Date().getFullYear()} EYE CON Eyewear. All rights reserved.
+        <div className="space-y-1 text-center sm:text-left">
+          <div>
+            &copy; {new Date().getFullYear()} EYE CON Eyewear. All rights reserved.
+          </div>
+          <div className="text-slate-400 text-[11px] pt-0.5">
+            Developed by <span className="text-[#FF8C42] font-semibold">Sohail Ansari</span> &bull; Phone: <a href="tel:7004836674" className="hover:text-white underline transition-colors">7004836674</a>
+          </div>
         </div>
         <div className="flex items-center gap-6">
           <a href="#home" onClick={(e) => { e.preventDefault(); handleNavClick('home'); }} className="hover:text-white transition-colors">Privacy Policy</a>
@@ -150,6 +155,7 @@ export default function Footer() {
           </button>
         </div>
       </div>
+
     </footer>
   );
 }

@@ -5,12 +5,12 @@
 
 import { Frame } from '../types';
 
-import crosslytTr3321 from '../assets/images/crosslyt_tr3321.jpg';
-import crosslytCl91016 from '../assets/images/crosslyt_cl91016.jpg';
-import crosslyt90657 from '../assets/images/crosslyt_90657.jpg';
-import crosslytCl51031 from '../assets/images/crosslyt_cl51031.jpg';
-import crosslytA2859 from '../assets/images/crosslyt_a2859.jpg';
-import crosslytCl91016_145 from '../assets/images/crosslyt_cl91016_145.jpg';
+import crosslytTr3321 from '../assets/images/crosslyt_tr3321.webp';
+import crosslytCl91016 from '../assets/images/crosslyt_cl91016.webp';
+import crosslyt90657 from '../assets/images/crosslyt_90657.webp';
+import crosslytCl51031 from '../assets/images/crosslyt_cl51031.webp';
+import crosslytA2859 from '../assets/images/crosslyt_a2859.webp';
+import crosslytCl91016_145 from '../assets/images/crosslyt_cl91016_145.webp';
 
 export const FRAMES_DATA: Frame[] = [
   {
